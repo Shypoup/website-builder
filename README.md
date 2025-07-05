@@ -4,12 +4,13 @@ A modern, drag-and-drop website builder built with Next.js, React, and TypeScrip
 
 ## Desktop demo:
 
+https://github.com/user-attachments/assets/07a8a85d-6d1c-4ae0-925a-aee41d65d318
+
+## Mobile demo:
 
 
 
-
-Uploading screen-capture (7).mp4…
-
+https://github.com/user-attachments/assets/90bc61b6-cec0-40e8-9bae-4c67139e7897
 
 
 ## 🚀 Features
