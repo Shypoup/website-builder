@@ -2,6 +2,12 @@
 
 A modern, drag-and-drop website builder built with Next.js, React, and TypeScript. Create beautiful websites with a visual editor that supports multiple device previews, real-time editing, and project management.
 
+## Live demo 
+
+
+https://github.com/user-attachments/assets/a548ac1f-174b-4be3-911b-cc60f5935bea
+
+
 ## 🚀 Features
 
 ### Visual Website Builder
