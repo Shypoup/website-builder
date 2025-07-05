@@ -1,30 +1,34 @@
 import React from 'react';
 
-interface ContentSectionProps {
-  props: {
+interface ContentProps {
     heading: string;
     content: string;
     content2?: string;
-    style: {
-      background: string;
-      color: string;
-      align: string;
-      padding: string;
+    style?: {
+        background?: string;
+        color?: string;
+        padding?: number;
+        align?: 'left' | 'center' | 'right';
+        justify?: string;
+        textShadow?: string;
     };
-  };
-  selected?: boolean;
-  onClick?: () => void;
-  preview?: boolean;
 }
 
-export function ContentSection({ props, selected, onClick, preview }: ContentSectionProps) {
+export interface ContentSectionProps {
+    props: ContentProps;
+    selected?: boolean;
+    onClick?: () => void;
+    preview?: boolean;
+}
+
+export function ContentSection({ props, selected, onClick, preview = false }: ContentSectionProps) {
   const { heading, content, content2, style } = props;
 
   const sectionStyle = {
-    background: style.background,
-    color: style.color,
-    textAlign: style.align as 'left' | 'center' | 'right',
-    padding: preview ? '12px' : style.padding || '2rem',
+    background: style?.background,
+    color: style?.color,
+    textAlign: style?.align as 'left' | 'center' | 'right' || 'left',
+    padding: preview ? '12px' : style?.padding || '2rem',
     border: preview ? '1px solid #eee' : (selected ? '2px solid #6366f1' : '1px solid #ccc'),
     borderRadius: preview ? 6 : 8,
     margin: preview ? 0 : '12px 0',

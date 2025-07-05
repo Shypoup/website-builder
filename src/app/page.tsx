@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Star, Zap, Palette, Code, Smartphone, Globe } from "lucide-react";
 import { Metadata } from "next";
 
-const metadata:Metadata ={
+export const metadata:Metadata ={
   title:"Build Beautiful Websites in Minutes",
   description:"Create stunning, professional websites without writing a single line of code. Drag, drop, and customize with our intuitive builder."
 }
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
@@ -162,8 +163,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "This website builder is incredible! I created my business website in just a few hours. 
-                The drag-and-drop interface is so intuitive."
+                &ldquo;This website builder is incredible! I created my business website in just a few hours. 
+                The drag-and-drop interface is so intuitive.&rdquo;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-red-500 rounded-full"></div>
@@ -181,8 +182,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "Finally, a website builder that doesn't require any technical knowledge. 
-                My portfolio looks professional and loads super fast!"
+                &ldquo;Finally, a website builder that doesn&apos;t require any technical knowledge. 
+                My portfolio looks professional and loads super fast!&rdquo;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-red-500 rounded-full"></div>
@@ -200,8 +201,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="text-gray-600 mb-6">
-                "The best investment for my startup. Professional website in minutes, 
-                and the customer support is outstanding."
+                &ldquo;The best investment for my startup. Professional website in minutes, 
+                and the customer support is outstanding.&rdquo;
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-red-500 rounded-full"></div>

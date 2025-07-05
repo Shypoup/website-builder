@@ -1,32 +1,36 @@
 import React from 'react';
 
-interface ContactSectionProps {
-  props: {
+interface ContactProps {
     heading: string;
     subheading: string;
     email: string;
     phone: string;
     address?: string;
-    style: {
-      background: string;
-      color: string;
-      align: string;
-      padding: string;
+    style?: {
+        background?: string;
+        color?: string;
+        padding?: number;
+        align?: 'left' | 'center' | 'right';
+        justify?: string;
+        textShadow?: string;
     };
-  };
-  selected?: boolean;
-  onClick?: () => void;
-  preview?: boolean;
 }
 
-export function ContactSection({ props, selected, onClick, preview }: ContactSectionProps) {
+export interface ContactSectionProps {
+    props: ContactProps;
+    selected?: boolean;
+    onClick?: () => void;
+    preview?: boolean;
+}
+
+export function ContactSection({ props, selected, onClick, preview = false }: ContactSectionProps) {
   const { heading, subheading, email, phone, address, style } = props;
 
   const sectionStyle = {
-    background: style.background,
-    color: style.color,
-    textAlign: style.align as 'left' | 'center' | 'right',
-    padding: preview ? '12px' : style.padding || '2rem',
+    background: style?.background,
+    color: style?.color,
+    textAlign: style?.align as 'left' | 'center' | 'right',
+    padding: preview ? '12px' : style?.padding || '2rem',
     border: preview ? '1px solid #eee' : (selected ? '2px solid #6366f1' : '1px solid #ccc'),
     borderRadius: preview ? 6 : 8,
     margin: preview ? 0 : '12px 0',

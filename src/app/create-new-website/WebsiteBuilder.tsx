@@ -20,9 +20,15 @@ import { SECTION_LIBRARY } from "@/lib/sectionLibrary";
 import { RenderSection, RenderSectionPreview } from "@/lib/sectionRenderer";
 import { cn } from "@/lib/utils";
 
+type Section = {
+  id: string | number;
+  type: string;
+  props: Record<string, unknown>;
+};
+
 export default function CreateNewWebsiteClient() {
   const [device, setDevice] = useState("desktop");
-  const [sections, setSections] = useState<any[]>([]);
+  const [sections, setSections] = useState<Array<Section>>([]);
   const [selectedSectionIdx, setSelectedSectionIdx] = useState<number | null>(
     null
   );
@@ -213,7 +219,7 @@ export default function CreateNewWebsiteClient() {
   };
 
   // Update section props
-  const handleSectionPropChange = (key: string, value: any) => {
+  const handleSectionPropChange = (key: string, value: string) => {
     if (selectedSectionIdx === null) return;
     setSections((prev) =>
       prev.map((s, i) =>
@@ -229,21 +235,21 @@ export default function CreateNewWebsiteClient() {
     arrayKey: string,
     idx: number,
     key: string,
-    value: any
+    value: string | boolean | string[]
   ) => {
     if (selectedSectionIdx === null) return;
     setSections((prev) =>
       prev.map((s, i) => {
         if (i !== selectedSectionIdx) return s;
-        const arr = [...s.props[arrayKey]];
-        arr[idx] = { ...arr[idx], [key]: value };
+        const arr = Array.isArray(s.props[arrayKey]) ? [...(s.props[arrayKey] as unknown[])] : [];
+        arr[idx] = { ...(arr[idx] as object), [key]: value };
         return { ...s, props: { ...s.props, [arrayKey]: arr } };
       })
     );
   };
 
   // Update style
-  const handleSectionStyleChange = (styleKey: string, value: any) => {
+  const handleSectionStyleChange = (styleKey: string, value: string) => {
     if (selectedSectionIdx === null) return;
     setSections((prev) =>
       prev.map((s, i) =>
@@ -252,7 +258,7 @@ export default function CreateNewWebsiteClient() {
               ...s,
               props: {
                 ...s.props,
-                style: { ...s.props.style, [styleKey]: value },
+                style: { ...((s.props.style ?? {}) as Record<string, unknown>), [styleKey]: value },
               },
             }
           : s
@@ -276,11 +282,11 @@ export default function CreateNewWebsiteClient() {
   };
 
   // Reorder handler for Framer Motion
-  const handleReorder = (newOrderIds: any[]) => {
+  const handleReorder = (newOrderIds: (string | number)[]) => {
     setSections((prevSections) => {
       // Map of id to section
       const sectionMap = Object.fromEntries(prevSections.map((s) => [s.id, s]));
-      return newOrderIds.map((id: any) => sectionMap[id]);
+      return newOrderIds.map((id) => sectionMap[id]);
     });
   };
 
@@ -325,7 +331,6 @@ export default function CreateNewWebsiteClient() {
     <div className={cn('flex flex-col' ,isFullScreen && 'fixed inset-0 z-50 bg-white')}>
       {/* Toolbar */}
       <Toolbar
-        onSaveProject={() => setSaveProjectOpen(true)}
         onExportDesign={handleExportDesign}
         onImportDesign={handleImportDesign}
         onClearDesign={handleClearDesign}
@@ -334,7 +339,6 @@ export default function CreateNewWebsiteClient() {
         isFullScreen={isFullScreen}
         onToggleFullScreen={handleToggleFullScreen}
         sectionsLength={sections.length}
-        saveProjectOpen={saveProjectOpen}
         setSaveProjectOpen={setSaveProjectOpen}
       />
 

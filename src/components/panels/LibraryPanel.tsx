@@ -8,15 +8,32 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 
+interface SectionVariant {
+  name: string;
+  defaultProps: Record<string, unknown>;
+}
+
+interface SectionType {
+  type: string;
+  name: string;
+  variants: SectionVariant[];
+}
+
+interface LibraryPanelProps {
+  SECTION_LIBRARY: SectionType[];
+  handleAddSection: (sectionType: string, variantIndex: number) => void;
+  RenderSectionPreview: React.ComponentType<{ section: { type: string; props: Record<string, unknown> } }>;
+}
+
 export default function LibraryPanel({
   SECTION_LIBRARY,
   handleAddSection,
   RenderSectionPreview,
-}: any) {
+}: LibraryPanelProps) {
   return (
     <div className="flex-1">
       <div className="flex flex-col gap-3">
-        {SECTION_LIBRARY.map((section: any, idx: number) => (
+        {SECTION_LIBRARY.map((section: SectionType, idx: number) => (
           <Accordion
             type="single"
             collapsible
@@ -31,7 +48,7 @@ export default function LibraryPanel({
                 {section.name}
               </AccordionTrigger>
               <AccordionContent>
-                {section.variants.map((variant: any, vIdx: number) => (
+                {section.variants.map((variant: SectionVariant, vIdx: number) => (
                   <Card
                     key={vIdx}
                     className="flex w-full gap-2 mb-2 cursor-pointer p-2 hover:bg-gray-50"

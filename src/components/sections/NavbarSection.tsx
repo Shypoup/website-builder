@@ -1,7 +1,34 @@
 import React from 'react';
+import Image from 'next/image';
 
-export function NavbarSection({ props, selected, onClick, preview = false }: any) {
-    const style = {
+interface NavbarLink {
+    label: string;
+    url?: string;
+}
+
+interface NavbarProps {
+    title: string;
+    logo?: string;
+    links: NavbarLink[];
+    style?: {
+        background?: string;
+        color?: string;
+        padding?: number;
+        align?: 'left' | 'center' | 'right';
+        justify?: string;
+        textShadow?: string;
+    };
+}
+
+export interface NavbarSectionProps {
+    props: NavbarProps;
+    selected?: boolean;
+    onClick?: () => void;
+    preview?: boolean;
+}
+
+export function NavbarSection({ props, selected, onClick, preview = false }: NavbarSectionProps) {
+    const style: React.CSSProperties = {
         ...props.style,
         border: preview ? '1px solid #eee' : (selected ? '2px solid #6366f1' : '1px solid #ccc'),
         borderRadius: preview ? 6 : 8,
@@ -38,12 +65,12 @@ export function NavbarSection({ props, selected, onClick, preview = false }: any
                 minWidth: preview ? 'auto' : 0
             }}>
                 {props.logo && (
-                    <img 
+                    <Image 
                         src={props.logo} 
                         alt="logo" 
+                        width={preview ? 18 : 28}
+                        height={preview ? 18 : 28}
                         style={{ 
-                            height: preview ? 18 : 28, 
-                            width: preview ? 18 : 28, 
                             objectFit: 'contain',
                             flexShrink: 0
                         }} 
@@ -70,9 +97,9 @@ export function NavbarSection({ props, selected, onClick, preview = false }: any
                 flex: 1,
                 minWidth: 0
             }}>
-                {props.links.map((l: any, i: number) => (
+                {props.links.map((link: NavbarLink, index: number) => (
                     <span 
-                        key={i} 
+                        key={index} 
                         style={{ 
                             color: style.color, 
                             textDecoration: 'underline', 
@@ -84,7 +111,7 @@ export function NavbarSection({ props, selected, onClick, preview = false }: any
                             transition: 'background-color 0.2s'
                         }}
                     >
-                        {l.label}
+                        {link.label}
                     </span>
                 ))}
             </nav>

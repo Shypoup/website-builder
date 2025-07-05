@@ -1,7 +1,33 @@
 import React from 'react';
 
-export function FooterSection({ props, selected, onClick, preview = false }: any) {
-    const style = {
+interface SocialLink {
+    label: string;
+    url?: string;
+}
+
+interface FooterProps {
+    copyright: string;
+    social: SocialLink[];
+    style?: {
+        background?: string;
+        color?: string;
+        padding?: number;
+        align?: 'left' | 'center' | 'right';
+        justify?: string;
+        textShadow?: string;
+        layout?: 'columns' | 'vertical' | 'horizontal';
+    };
+}
+
+export interface FooterSectionProps {
+    props: FooterProps;
+    selected?: boolean;
+    onClick?: () => void;
+    preview?: boolean;
+}
+
+export function FooterSection({ props, selected, onClick, preview = false }: FooterSectionProps) {
+    const style: React.CSSProperties = {
         ...props.style,
         border: preview ? '1px solid #eee' : (selected ? '2px solid #6366f1' : '1px solid #ccc'),
         borderRadius: preview ? 6 : 8,
@@ -42,7 +68,7 @@ export function FooterSection({ props, selected, onClick, preview = false }: any
                         wordWrap: 'break-word',
                         overflowWrap: 'break-word'
                     }}>
-                        {props.social.map((s: any, i: number) => s.label).join(' | ')}
+                        {props.social.map((social: SocialLink) => social.label).join(' | ')}
                     </div>
                 </div>
                 <div style={{ 
@@ -67,7 +93,7 @@ export function FooterSection({ props, selected, onClick, preview = false }: any
                 flex: 1,
                 minWidth: 0
             }}>
-                {props.social.map((s: any, i: number) => s.label).join(' | ')}
+                {props.social.map((social: SocialLink) => social.label).join(' | ')}
             </div>
             <div style={{ 
                 fontSize: preview ? 11 : undefined,

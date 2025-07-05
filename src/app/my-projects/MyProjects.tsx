@@ -14,12 +14,18 @@ import {
   AlertDialogCancel,
 } from '@/components/ui/alert-dialog';
 
+interface Section {
+  id: number;
+  type: string;
+  props: Record<string, unknown>;
+}
+
 interface Project {
   id: string;
   name: string;
   description?: string;
   lastModified: string;
-  sections: any[];
+  sections: Section[];
   device: string;
   nextSectionId: number;
 }
@@ -48,30 +54,7 @@ export default function MyProjectsClient() {
     localStorage.setItem('website-builder-projects', JSON.stringify(projectsList));
   };
 
-  // Create new project from current design
-  const createNewProject = () => {
-    const currentDesign = localStorage.getItem('website-builder-design');
-    if (currentDesign) {
-      try {
-        const designData = JSON.parse(currentDesign);
-        const newProject: Project = {
-          id: Date.now().toString(),
-          name: `Project ${projects.length + 1}`,
-          description: 'Created from current design',
-          lastModified: new Date().toISOString(),
-          sections: designData.sections || [],
-          device: designData.device || 'desktop',
-          nextSectionId: designData.nextSectionId || 0,
-        };
-        
-        const updatedProjects = [...projects, newProject];
-        setProjects(updatedProjects);
-        saveProjects(updatedProjects);
-      } catch (error) {
-        console.error('Error creating new project:', error);
-      }
-    }
-  };
+
 
   // Delete project
   const handleDeleteProject = (projectId: string) => {

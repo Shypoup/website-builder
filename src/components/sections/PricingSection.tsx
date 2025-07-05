@@ -8,39 +8,43 @@ interface Plan {
   popular: boolean;
 }
 
-interface PricingSectionProps {
-  props: {
-    heading: string;
-    subheading: string;
-    plans: Plan[];
-    style: {
-      background: string;
-      color: string;
-      align: string;
-      padding: string;
-    };
+interface PricingProps {
+  heading: string;
+  subheading: string;
+  plans: Plan[];
+  style?: {
+    background?: string;
+    color?: string;
+    padding?: number;
+    align?: 'left' | 'center' | 'right';
+    justify?: string;
+    textShadow?: string;
   };
+}
+
+export interface PricingSectionProps {
+  props: PricingProps;
   selected?: boolean;
   onClick?: () => void;
   preview?: boolean;
 }
 
-export function PricingSection({ props, selected, onClick, preview }: PricingSectionProps) {
+export function PricingSection({ props, selected, onClick, preview = false }: PricingSectionProps) {
   const { heading, subheading, plans, style } = props;
 
   const sectionStyle = {
-    background: style.background,
-    color: style.color,
-    textAlign: style.align as 'left' | 'center' | 'right',
-    padding: preview ? '12px' : style.padding || '2rem',
+    background: style?.background,
+    color: style?.color,
+    textAlign: (style?.align as 'left' | 'center' | 'right') || 'left',
+    padding: preview ? '12px' : style?.padding || '2rem',
     border: preview ? '1px solid #eee' : (selected ? '2px solid #6366f1' : '1px solid #ccc'),
     borderRadius: preview ? 6 : 8,
     margin: preview ? 0 : '12px 0',
-    cursor: preview ? 'default' : 'pointer',
+    cursor: onClick ? 'pointer' : undefined,
     position: 'relative' as const,
     boxShadow: selected ? '0 0 0 2px #6366f1' : (preview ? '0 1px 4px #0001' : undefined),
     transition: 'box-shadow 0.2s, border 0.2s',
-    minHeight: preview ? 80 : undefined,
+    minHeight: preview ? 60 : 120,
     width: '100%',
   };
 

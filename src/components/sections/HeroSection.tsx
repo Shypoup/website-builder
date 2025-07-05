@@ -1,7 +1,27 @@
 import React from 'react';
 
-export function HeroSection({ props, selected, onClick, preview = false }: any) {
-    const style = {
+interface HeroProps {
+    heading: string;
+    subheading: string;
+    style?: {
+        background?: string;
+        color?: string;
+        padding?: number;
+        align?: 'left' | 'center' | 'right';
+        justify?: string;
+        textShadow?: string;
+    };
+}
+
+export interface HeroSectionProps {
+    props: HeroProps;
+    selected?: boolean;
+    onClick?: () => void;
+    preview?: boolean;
+}
+
+export function HeroSection({ props, selected, onClick, preview = false }: HeroSectionProps) {
+    const style: React.CSSProperties = {
         ...props.style,
         border: preview ? '1px solid #eee' : (selected ? '2px solid #6366f1' : '1px solid #ccc'),
         borderRadius: preview ? 6 : 8,

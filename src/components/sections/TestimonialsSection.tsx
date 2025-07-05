@@ -7,17 +7,19 @@ interface Testimonial {
   rating: number;
 }
 
-interface TestimonialsSectionProps {
-  props: {
-    heading: string;
-    testimonials: Testimonial[];
-    style: {
-      background: string;
-      color: string;
-      align: string;
-      padding: string;
-    };
+interface TestimonialsProps {
+  heading: string;
+  testimonials: Testimonial[];
+  style: {
+    background: string;
+    color: string;
+    align: string;
+    padding: string;
   };
+}
+
+export interface TestimonialsSectionProps {
+  props: TestimonialsProps;
   selected?: boolean;
   onClick?: () => void;
   preview?: boolean;
@@ -107,7 +109,7 @@ export function TestimonialsSection({ props, selected, onClick, preview }: Testi
                 wordWrap: 'break-word',
                 overflowWrap: 'break-word'
               }}>
-                "{testimonial.content}"
+                &ldquo;{testimonial.content}&rdquo;
               </div>
               
               <div style={{

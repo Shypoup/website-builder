@@ -6,7 +6,6 @@ import { useState } from 'react';
 
 interface ToolbarProps {
   // Project actions
-  onSaveProject: () => void;
   onExportDesign: () => void;
   onImportDesign: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClearDesign: () => void;
@@ -21,12 +20,10 @@ interface ToolbarProps {
   
   // States
   sectionsLength: number;
-  saveProjectOpen: boolean;
   setSaveProjectOpen: (open: boolean) => void;
 }
 
 export default function Toolbar({
-  onSaveProject,
   onExportDesign,
   onImportDesign,
   onClearDesign,
@@ -35,7 +32,6 @@ export default function Toolbar({
   isFullScreen,
   onToggleFullScreen,
   sectionsLength,
-  saveProjectOpen,
   setSaveProjectOpen,
 }: ToolbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

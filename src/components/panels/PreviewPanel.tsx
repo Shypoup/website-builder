@@ -1,11 +1,11 @@
 import { motion, Reorder } from "framer-motion";
 import React, { useState, useEffect } from "react";
 
-interface Section {
-  id: string;
+type Section = {
+  id: string | number;
   type: string;
-  [key: string]: any;
-}
+  props: Record<string, unknown>;
+};
 
 interface DeviceSizes {
   [key: string]: {
@@ -21,7 +21,7 @@ interface PreviewPanelProps {
   sections: Section[];
   selectedSectionIdx: number | null;
   setSelectedSectionIdx: (index: number | null) => void;
-  handleReorder: (newOrder: string[]) => void;
+  handleReorder: (newOrder: (string | number)[]) => void;
   RenderSection: React.ComponentType<{
     section: Section;
     selected: boolean;
@@ -90,11 +90,11 @@ export default function PreviewPanel({
         )}
         <Reorder.Group
           axis="y"
-          values={sections.map((s: any) => s.id)}
+          values={sections.map((s) => s.id)}
           onReorder={handleReorder}
           style={{ minHeight: isFullScreen ? 200 : 100 }}
         >
-          {sections.map((section: any, idx: number) => (
+          {sections.map((section, idx) => (
             <Reorder.Item
               key={section.id}
               value={section.id}
