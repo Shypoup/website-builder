@@ -347,7 +347,7 @@ export default function CreateNewWebsiteClient() {
       <div className={cn('flex flex-1 items-start gap-2 p-2 lg:gap-4 lg:p-4 flex-col lg:flex-row', isFullScreen && 'overflow-hidden')}>
         {/* Sidebar - Hidden in full screen mode */}
         {!isFullScreen && (
-          <div className="lg:block lg:w-80 border border-gray-200 rounded-md p-4">
+          <div className="lg:block w-full lg:w-80 border border-gray-200 rounded-md p-4">
             <Tabs
               value={activeTab}
               onValueChange={setActiveTab}
