@@ -8,6 +8,15 @@ type Section = {
   props: Record<string, unknown>;
 };
 
+interface StyleProps {
+  background?: string;
+  color?: string;
+  padding?: number;
+  align?: string;
+  justify?: string;
+  textShadow?: string;
+}
+
 interface PropertiesPanelProps {
   selectedSectionIdx: number | null;
   sections: Section[];
@@ -33,7 +42,7 @@ export default function PropertiesPanel({
     
     if (section.type === 'navbar') {
         const links = section.props.links as { label: string; url?: string }[];
-        const style = section.props.style as { background?: string; color?: string; padding?: number; align?: string; justify?: string; textShadow?: string };
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -118,6 +127,7 @@ export default function PropertiesPanel({
     }
     
     if (section.type === 'hero') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -143,7 +153,7 @@ export default function PropertiesPanel({
                 <div>
                     <label className="text-sm font-medium block mb-1">Background Color/Image</label>
                     <Input 
-                        value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                        value={typeof style.background === 'string' ? style.background : ''} 
                         onChange={e => handleSectionStyleChange('background', e.target.value)} 
                         placeholder="#eee or url(image.jpg)" 
                         className="text-sm mb-2"
@@ -154,14 +164,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#000'}
+                            value={typeof style.color === 'string' ? style.color : '#000'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -174,6 +184,7 @@ export default function PropertiesPanel({
     }
 
     if (section.type === 'content') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -214,14 +225,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Background Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                            value={typeof style.background === 'string' ? style.background : ''} 
                             onChange={e => handleSectionStyleChange('background', e.target.value)} 
                             placeholder="#fff" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : '#fff'}
+                            value={typeof style.background === 'string' ? style.background : '#fff'}
                             onChange={e => handleSectionStyleChange('background', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -232,14 +243,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#000'}
+                            value={typeof style.color === 'string' ? style.color : '#000'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -252,6 +263,7 @@ export default function PropertiesPanel({
     }
 
     if (section.type === 'features') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -297,14 +309,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Background Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                            value={typeof style.background === 'string' ? style.background : ''} 
                             onChange={e => handleSectionStyleChange('background', e.target.value)} 
                             placeholder="#f8f9fa" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : '#f8f9fa'}
+                            value={typeof style.background === 'string' ? style.background : '#f8f9fa'}
                             onChange={e => handleSectionStyleChange('background', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -315,14 +327,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#000'}
+                            value={typeof style.color === 'string' ? style.color : '#000'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -335,6 +347,7 @@ export default function PropertiesPanel({
     }
 
     if (section.type === 'testimonials') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -389,14 +402,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Background Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                            value={typeof style.background === 'string' ? style.background : ''} 
                             onChange={e => handleSectionStyleChange('background', e.target.value)} 
                             placeholder="#f8f9fa" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : '#f8f9fa'}
+                            value={typeof style.background === 'string' ? style.background : '#f8f9fa'}
                             onChange={e => handleSectionStyleChange('background', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -407,14 +420,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#000'}
+                            value={typeof style.color === 'string' ? style.color : '#000'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -427,6 +440,7 @@ export default function PropertiesPanel({
     }
 
     if (section.type === 'contact') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -485,14 +499,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Background Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                            value={typeof style.background === 'string' ? style.background : ''} 
                             onChange={e => handleSectionStyleChange('background', e.target.value)} 
                             placeholder="#fff" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : '#fff'}
+                            value={typeof style.background === 'string' ? style.background : '#fff'}
                             onChange={e => handleSectionStyleChange('background', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -503,14 +517,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#000'}
+                            value={typeof style.color === 'string' ? style.color : '#000'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -523,6 +537,7 @@ export default function PropertiesPanel({
     }
 
     if (section.type === 'pricing') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -597,14 +612,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Background Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                            value={typeof style.background === 'string' ? style.background : ''} 
                             onChange={e => handleSectionStyleChange('background', e.target.value)} 
                             placeholder="#fff" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : '#fff'}
+                            value={typeof style.background === 'string' ? style.background : '#fff'}
                             onChange={e => handleSectionStyleChange('background', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -615,14 +630,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#000'}
+                            value={typeof style.color === 'string' ? style.color : '#000'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -635,6 +650,7 @@ export default function PropertiesPanel({
     }
 
     if (section.type === 'footer') {
+        const style = section.props.style as StyleProps;
         return (
             <div className="flex flex-col gap-3">
                 <div>
@@ -671,14 +687,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Background Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : ''} 
+                            value={typeof style.background === 'string' ? style.background : ''} 
                             onChange={e => handleSectionStyleChange('background', e.target.value)} 
                             placeholder="#222" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.background === 'string' ? (section.props.style as any).background : '#222'}
+                            value={typeof style.background === 'string' ? style.background : '#222'}
                             onChange={e => handleSectionStyleChange('background', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
@@ -689,14 +705,14 @@ export default function PropertiesPanel({
                     <label className="text-sm font-medium block mb-1">Text Color</label>
                     <div className="flex gap-2">
                         <Input 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : ''} 
+                            value={typeof style.color === 'string' ? style.color : ''} 
                             onChange={e => handleSectionStyleChange('color', e.target.value)} 
                             placeholder="#fff" 
                             className="text-sm flex-1"
                         />
                         <input 
                             type="color" 
-                            value={typeof (section.props.style as any)?.color === 'string' ? (section.props.style as any).color : '#fff'}
+                            value={typeof style.color === 'string' ? style.color : '#fff'}
                             onChange={e => handleSectionStyleChange('color', e.target.value)}
                             className="w-10 h-10 rounded border"
                         />
